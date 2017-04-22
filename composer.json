@@ -1,0 +1,27 @@
+{
+    "name": "beaten-sect0r/yii2-flatpickr",
+    "description": "Datetime picker widget for Yii2 framework",
+    "keywords": ["yii2", "extension", "datetime picker", "flatpickr"],
+    "authors": [
+        {
+            "name": "Alexander Volkov",
+            "email": "beatensect0r@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/Beaten-Sect0r/yii2-flatpickr/issues?state=open",
+        "source": "https://github.com/Beaten-Sect0r/yii2-flatpickr"
+    },
+    "require": {
+        "yiisoft/yii2": "~2.0.6",
+        "bower-asset/flatpickr-calendar": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "bs\\Flatpickr\\": "src"
+        }
+    }
+}
