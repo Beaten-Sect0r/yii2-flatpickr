@@ -30,24 +30,28 @@ class Widget extends InputWidget
     
     /**
      * Disable input
+     *
      * @var bool
      */
     public $disabled = false;
 
     /**
      * Show group buttons
+     *
      * @var bool
      */
     public $groupBtnShow = false;
 
     /**
      * Buttons template
+     *
      * @var string
      */
-    public $groupBtnTemplate = '{toggle}{clear}';
+    public $groupBtnTemplate = '{toggle} {clear}';
 
     /**
      * Buttons
+     *
      * @var array
      */
     public $groupBtn = [
@@ -79,55 +83,59 @@ class Widget extends InputWidget
      */
     public function run()
     {
-        if ($this->groupBtnShow)
+        if ($this->groupBtnShow) {
             $this->clientOptions['wrap'] = true;
-        else
+        } else {
             $this->clientOptions['wrap'] = false;
+        }
 
         $this->registerClientScript();
         $content = '';
         $options['data-input'] = '';
-        if ($this->disabled)
+        if ($this->disabled) {
             $options['disabled'] = 'disabled';
+        }
 
         if ($this->groupBtnShow) {
             $content .= '<div class="flatpickr-' . $this->options['id'] . ' input-group">';
 
             if ($this->hasModel()) {
-                $content .= Html::activeTextInput($this->model, $this->attribute, array_merge($this->options, $options));
+                $content .= Html::activeTextInput($this->model, $this->attribute, ArrayHelper::merge($this->options, $options));
             } else {
-                $content .= Html::textInput($this->name, $this->value, array_merge($this->options, $options));
+                $content .= Html::textInput($this->name, $this->value, ArrayHelper::merge($this->options, $options));
             }
 
             $content .= '<div class="input-group-btn">';
             if (preg_match_all('/{(toggle|clear)}/i', $this->groupBtnTemplate, $matches)) {
-                foreach ($matches[1] as $btnName)
+                foreach ($matches[1] as $btnName) {
                     $content .= $this->renderGroupBtn($btnName);
+                }
             }
             $content .= '</div>';
             $content .= '</div>';
         } else {
             if ($this->hasModel()) {
-                $content = Html::activeTextInput($this->model, $this->attribute, array_merge($this->options, $options));
+                $content = Html::activeTextInput($this->model, $this->attribute, ArrayHelper::merge($this->options, $options));
             } else {
-                $content = Html::textInput($this->name, $this->value, array_merge($this->options, $options));
+                $content = Html::textInput($this->name, $this->value, ArrayHelper::merge($this->options, $options));
             }
         }
 
         return $content;
     }
 
-/**
+    /**
      * Register widget client scripts.
      */
     protected function registerClientScript()
     {
         $view = $this->getView();
 
-        if ($this->groupBtnShow)
+        if ($this->groupBtnShow) {
             $selector = Json::encode('.flatpickr-' . $this->options['id']);
-        else
+        } else {
             $selector = Json::encode('#' . $this->options['id']);
+        }
 
         $options = !empty($this->clientOptions) ? Json::encode($this->clientOptions) : '';
 
@@ -135,16 +143,14 @@ class Widget extends InputWidget
         if (!empty($this->theme)) {
             FlatpickrAsset::register($view)->css[] = 'themes/' . $this->theme . '.css';
         }
-        if (!empty($this->locale)) {
+        if ($this->locale !== null && $this->locale !== 'en') {
             FlatpickrAsset::register($view)->js[] = 'l10n/' . $this->locale . '.js';
         }
 
         $view->registerJs("flatpickr($selector, {$options});");
     }
-    
-    
-    
-        /**
+
+    /**
      * @param string $btnName
      * @return string
      */
@@ -152,19 +158,22 @@ class Widget extends InputWidget
     {
         $content = '';
         if (isset($this->groupBtn[$btnName])) {
-            if (isset($this->groupBtn[$btnName]['btnClass']))
+            if (isset($this->groupBtn[$btnName]['btnClass'])) {
                 $btnClass = $this->groupBtn[$btnName]['btnClass'];
-            else
+            } else {
                 $btnClass = 'btn btn-default';
+            }
 
-            if (isset($this->groupBtn[$btnName]['iconClass']))
+            if (isset($this->groupBtn[$btnName]['iconClass'])) {
                 $iconClass = $this->groupBtn[$btnName]['iconClass'];
-            else
+            } else {
                 $iconClass = '';
+            }
 
             $disabled = '';
-            if ($this->disabled)
+            if ($this->disabled) {
                 $disabled = 'disabled="disabled"';
+            }
 
             $content = <<<HTML
                 <button class="$btnClass" type="button" $disabled data-$btnName>
@@ -172,6 +181,7 @@ class Widget extends InputWidget
                 </button>
 HTML;
         }
+
         return $content;
     }
 }

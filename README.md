@@ -38,6 +38,7 @@ use bs\Flatpickr\Widget as Flatpickr;
 
 <?= $form->field($model, 'published_at')->widget(Flatpickr::className(), [
     'locale' => strtolower(substr(Yii::$app->language, 0, 2)),
+    'groupBtnShow' => true,
     'options' => [
         'class' => 'form-control',
     ],
