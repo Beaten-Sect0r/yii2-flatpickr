@@ -15,10 +15,10 @@ class FlatpickrAsset extends AssetBundle
         'flatpickr.min.css',
     ];
 
-	/**
-	 * @param string $plugin
-	 * @param \yii\web\View $view
-	 */
+    /**
+     * @param string $plugin
+     * @param \yii\web\View $view
+     */
     public static function addPluginFiles($plugin, $view)
     {
         switch ($plugin) {
