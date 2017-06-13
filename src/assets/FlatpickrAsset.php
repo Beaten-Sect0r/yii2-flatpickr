@@ -27,7 +27,6 @@ class FlatpickrAsset extends AssetBundle
                 $view->registerCssFile(self::getPathUrl() . '/plugins/confirmDate/confirmDate.css');
                 break;
             case 'weekSelect':
-                $js[] = '/plugins/weekSelect/weekSelect.js';
                 $view->registerJsFile(self::getPathUrl() . '/plugins/weekSelect/weekSelect.js');
                 break;
         }
