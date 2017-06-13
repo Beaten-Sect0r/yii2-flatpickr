@@ -16,7 +16,7 @@
         "source": "https://github.com/Beaten-Sect0r/yii2-flatpickr"
     },
     "require": {
-        "yiisoft/yii2": "~2.0.6",
+        "yiisoft/yii2": "*",
         "bower-asset/flatpickr-calendar": "*"
     },
     "autoload": {

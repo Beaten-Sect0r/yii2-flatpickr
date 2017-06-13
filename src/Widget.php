@@ -26,6 +26,11 @@ class Widget extends InputWidget
     /**
      * @var string
      */
+    public $plugin;
+
+    /**
+     * @var string
+     */
     public $theme;
     
     /**
@@ -140,6 +145,7 @@ class Widget extends InputWidget
         $options = !empty($this->clientOptions) ? Json::encode($this->clientOptions) : '';
 
         FlatpickrAsset::register($view);
+        FlatpickrAsset::addPluginFiles($this->plugin, $view);
         if (!empty($this->theme)) {
             FlatpickrAsset::register($view)->css[] = 'themes/' . $this->theme . '.css';
         }
