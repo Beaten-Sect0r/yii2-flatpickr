@@ -8,6 +8,9 @@ use yii\web\AssetBundle;
 class FlatpickrAsset extends AssetBundle
 {
     public $sourcePath = '@bower/flatpickr-calendar/dist';
+    public $locale;
+    public $plugin;
+    public $theme;
     public $js = [
         'flatpickr.min.js',
     ];
@@ -15,24 +18,29 @@ class FlatpickrAsset extends AssetBundle
         'flatpickr.min.css',
     ];
 
-    /**
-     * @param string $plugin
-     * @param \yii\web\View $view
-     */
-    public static function addPluginFiles($plugin, $view)
+    public function registerAssetFiles($view)
     {
-        switch ($plugin) {
+        // language
+        if ($this->locale !== null && $this->locale !== 'en') {
+            $this->js[] = 'l10n/' . $this->locale . '.js';
+        }
+
+        // plugin
+        switch ($this->plugin) {
             case 'confirmDate':
-                $view->registerJsFile(self::getPathUrl() . '/plugins/confirmDate/confirmDate.js');
-                $view->registerCssFile(self::getPathUrl() . '/plugins/confirmDate/confirmDate.css');
+                $this->js[] = 'plugins/confirmDate/confirmDate.js';
+                $this->css[] = 'plugins/confirmDate/confirmDate.css';
                 break;
             case 'weekSelect':
-                $view->registerJsFile(self::getPathUrl() . '/plugins/weekSelect/weekSelect.js');
+                $this->js[] = 'plugins/weekSelect/weekSelect.js';
                 break;
         }
-    }
 
-    public static function getPathUrl() {
-        return Yii::$app->assetManager->getPublishedUrl('@bower/flatpickr-calendar/dist');
+        // theme
+        if (!empty($this->theme)) {
+            $this->css[] = 'themes/' . $this->theme . '.css';
+        }
+
+        parent::registerAssetFiles($view);
     }
 }
