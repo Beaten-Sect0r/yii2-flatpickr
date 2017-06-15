@@ -38,7 +38,7 @@ use bs\Flatpickr\Widget as Flatpickr;
 
 <?= $form->field($model, 'published_at')->widget(Flatpickr::className(), [
     'locale' => strtolower(substr(Yii::$app->language, 0, 2)),
-    'plugin' => 'confirmDate',
+    'plugins' => ['confirmDate'], // https://chmln.github.io/flatpickr/plugins/
     'groupBtnShow' => true,
     'options' => [
         'class' => 'form-control',

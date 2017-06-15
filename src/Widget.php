@@ -13,7 +13,7 @@ use bs\Flatpickr\assets\FlatpickrAsset;
 class Widget extends InputWidget
 {
     /**
-     * Plugin settings
+     * flatpickr
      * @link https://chmln.github.io/flatpickr/
      *
      * @var array
@@ -28,7 +28,7 @@ class Widget extends InputWidget
     /**
      * @var string
      */
-    public $plugin;
+    public $plugins = [];
 
     /**
      * @var string
@@ -77,32 +77,6 @@ class Widget extends InputWidget
      */
     public function init()
     {
-        $this->clientOptions['locale'] = $this->locale;
-
-        if (!empty($this->plugin)) {
-            switch ($this->plugin) {
-                case 'confirmDate':
-                    $plugin = '[new confirmDatePlugin({})]';
-                    break;
-                case 'label':
-                    $plugin = '[new labelPlugin({})]';
-                    break;
-                case 'weekSelect':
-                    $plugin = '[new weekSelectPlugin({})]';
-                    break;
-                case 'range':
-                    $plugin = '[new rangePlugin({})]';
-                    break;
-            }
-            $this->clientOptions['plugins'] = new JsExpression($plugin);
-        }
-
-        if (!empty($this->groupBtnShow)) {
-            $this->clientOptions['wrap'] = true;
-        } else {
-            $this->clientOptions['wrap'] = false;
-        }
-
         parent::init();
     }
 
@@ -111,6 +85,12 @@ class Widget extends InputWidget
      */
     public function run()
     {
+        if (!empty($this->groupBtnShow)) {
+            $this->clientOptions['wrap'] = true;
+        } else {
+            $this->clientOptions['wrap'] = false;
+        }
+
         $this->registerClientScript();
         $content = '';
         $options['data-input'] = '';
@@ -151,11 +131,32 @@ class Widget extends InputWidget
      */
     protected function registerClientScript()
     {
+        $this->clientOptions['locale'] = $this->locale;
+
+        if (!empty($this->plugins)) {
+            $plugins = [];
+
+            if (ArrayHelper::isIn('range', $this->plugins)) {
+                $plugins[] = 'rangePlugin({})';
+            }
+            if (ArrayHelper::isIn('confirmDate', $this->plugins)) {
+                $plugins[] = 'confirmDatePlugin({})';
+            }
+            if (ArrayHelper::isIn('label', $this->plugins)) {
+                $plugins[] = 'labelPlugin({})';
+            }
+            if (ArrayHelper::isIn('weekSelect', $this->plugins)) {
+                $plugins[] = 'weekSelectPlugin({})';
+            }
+
+            $this->clientOptions['plugins'] = new JsExpression('[new ' . implode(', ', $plugins) . ']');
+        }
+
         $view = $this->getView();
         $asset = FlatpickrAsset::register($view);
 
         $asset->locale = $this->locale;
-        $asset->plugin = $this->plugin;
+        $asset->plugins = $this->plugins;
         $asset->theme = $this->theme;
 
         if ($this->groupBtnShow) {

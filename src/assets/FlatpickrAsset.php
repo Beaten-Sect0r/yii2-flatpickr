@@ -3,13 +3,14 @@
 namespace bs\Flatpickr\assets;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\AssetBundle;
 
 class FlatpickrAsset extends AssetBundle
 {
     public $sourcePath = '@bower/flatpickr-calendar/dist';
     public $locale;
-    public $plugin;
+    public $plugins;
     public $theme;
     public $js = [
         'flatpickr.min.js',
@@ -26,20 +27,20 @@ class FlatpickrAsset extends AssetBundle
         }
 
         // plugin
-        switch ($this->plugin) {
-            case 'confirmDate':
+        if (!empty($this->plugins)) {
+            if (ArrayHelper::isIn('range', $this->plugins)) {
+                $this->js[] = 'plugins/rangePlugin.js';
+            }
+            if (ArrayHelper::isIn('confirmDate', $this->plugins)) {
                 $this->js[] = 'plugins/confirmDate/confirmDate.js';
                 $this->css[] = 'plugins/confirmDate/confirmDate.css';
-                break;
-            case 'label':
+            }
+            if (ArrayHelper::isIn('label', $this->plugins)) {
                 $this->js[] = 'plugins/labelPlugin/labelPlugin.js';
-                break;
-            case 'weekSelect':
+            }
+            if (ArrayHelper::isIn('weekSelect', $this->plugins)) {
                 $this->js[] = 'plugins/weekSelect/weekSelect.js';
-                break;
-            case 'range':
-                $this->js[] = 'plugins/rangePlugin.js';
-                break;
+            }
         }
 
         // theme
