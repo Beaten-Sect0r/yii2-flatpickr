@@ -82,10 +82,16 @@ class Widget extends InputWidget
         if (!empty($this->plugin)) {
             switch ($this->plugin) {
                 case 'confirmDate':
-                    $plugin = "[new confirmDatePlugin({})]";
+                    $plugin = '[new confirmDatePlugin({})]';
+                    break;
+                case 'label':
+                    $plugin = '[new labelPlugin({})]';
                     break;
                 case 'weekSelect':
-                    $plugin = "[new weekSelectPlugin({})]";
+                    $plugin = '[new weekSelectPlugin({})]';
+                    break;
+                case 'range':
+                    $plugin = '[new rangePlugin({})]';
                     break;
             }
             $this->clientOptions['plugins'] = new JsExpression($plugin);

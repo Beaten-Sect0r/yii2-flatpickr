@@ -31,8 +31,14 @@ class FlatpickrAsset extends AssetBundle
                 $this->js[] = 'plugins/confirmDate/confirmDate.js';
                 $this->css[] = 'plugins/confirmDate/confirmDate.css';
                 break;
+            case 'label':
+                $this->js[] = 'plugins/labelPlugin/labelPlugin.js';
+                break;
             case 'weekSelect':
                 $this->js[] = 'plugins/weekSelect/weekSelect.js';
+                break;
+            case 'range':
+                $this->js[] = 'plugins/rangePlugin.js';
                 break;
         }
 
