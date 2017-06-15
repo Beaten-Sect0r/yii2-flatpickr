@@ -10,7 +10,7 @@ class FlatpickrAsset extends AssetBundle
 {
     public $sourcePath = '@bower/flatpickr-calendar/dist';
     public $locale;
-    public $plugins;
+    public $plugins = [];
     public $theme;
     public $js = [
         'flatpickr.min.js',
