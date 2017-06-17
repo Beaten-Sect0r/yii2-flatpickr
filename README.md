@@ -41,7 +41,7 @@ use bs\Flatpickr\FlatpickrWidget;
     // https://chmln.github.io/flatpickr/plugins/
     'plugins' => [
          'confirmDate' => [
-               'confirmIcon'=> "<i class='fa fa-female'></i>",
+               'confirmIcon'=> "<i class='fa fa-check'></i>",
                'confirmText' => 'OK',
                'showAlways' => false,
                'theme' => 'light',
