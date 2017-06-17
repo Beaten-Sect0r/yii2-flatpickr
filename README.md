@@ -32,13 +32,21 @@ to the require section of your `composer.json` file.
 ```php
 <?php
 
-use bs\Flatpickr\Widget as Flatpickr;
+use bs\Flatpickr\FlatpickrWidget;
 
 ?>
 
-<?= $form->field($model, 'published_at')->widget(Flatpickr::className(), [
+<?= $form->field($model, 'published_at')->widget(FlatpickrWidget::className(), [
     'locale' => strtolower(substr(Yii::$app->language, 0, 2)),
-    'plugins' => ['confirmDate'], // https://chmln.github.io/flatpickr/plugins/
+    // https://chmln.github.io/flatpickr/plugins/
+    'plugins' => [
+         'confirmDate' => [
+               'confirmIcon'=> "<i class='fa fa-female'></i>",
+               'confirmText' => 'OK',
+               'showAlways' => false,
+               'theme' => 'light',
+         ],
+    ],
     'groupBtnShow' => true,
     'options' => [
         'class' => 'form-control',

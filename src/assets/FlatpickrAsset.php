@@ -27,18 +27,18 @@ class FlatpickrAsset extends AssetBundle
         }
 
         // plugin
-        if (!empty($this->plugins)) {
+        if (!empty($this->plugins) && is_array($this->plugins)) {
             if (ArrayHelper::isIn('range', $this->plugins)) {
                 $this->js[] = 'plugins/rangePlugin.js';
             }
-            if (ArrayHelper::isIn('confirmDate', $this->plugins)) {
+            if (ArrayHelper::keyExists('confirmDate', $this->plugins)) {
                 $this->js[] = 'plugins/confirmDate/confirmDate.js';
                 $this->css[] = 'plugins/confirmDate/confirmDate.css';
             }
             if (ArrayHelper::isIn('label', $this->plugins)) {
                 $this->js[] = 'plugins/labelPlugin/labelPlugin.js';
             }
-            if (ArrayHelper::isIn('weekSelect', $this->plugins)) {
+            if (ArrayHelper::keyExists('weekSelect', $this->plugins)) {
                 $this->js[] = 'plugins/weekSelect/weekSelect.js';
             }
         }

@@ -10,7 +10,7 @@ use yii\web\JsExpression;
 use yii\widgets\InputWidget;
 use bs\Flatpickr\assets\FlatpickrAsset;
 
-class Widget extends InputWidget
+class FlatpickrWidget extends InputWidget
 {
     /**
      * flatpickr
@@ -73,14 +73,6 @@ class Widget extends InputWidget
     ];
 
     /**
-     * @throws \yii\base\InvalidConfigException
-     */
-    public function init()
-    {
-        parent::init();
-    }
-
-    /**
      * @return string
      */
     public function run()
@@ -133,20 +125,20 @@ class Widget extends InputWidget
     {
         $this->clientOptions['locale'] = $this->locale;
 
-        if (!empty($this->plugins)) {
-            $plugins = [];
-
+        if (!empty($this->plugins) && is_array($this->plugins)) {
             if (ArrayHelper::isIn('range', $this->plugins)) {
-                $plugins[] = 'rangePlugin({})';
+                $plugins[] = 'rangePlugin()';
             }
-            if (ArrayHelper::isIn('confirmDate', $this->plugins)) {
-                $plugins[] = 'confirmDatePlugin({})';
+            if (ArrayHelper::keyExists('confirmDate', $this->plugins)) {
+                $options = Json::encode($this->plugins['confirmDate']);
+                $plugins[] = "confirmDatePlugin($options)";
             }
             if (ArrayHelper::isIn('label', $this->plugins)) {
-                $plugins[] = 'labelPlugin({})';
+                $plugins[] = 'labelPlugin()';
             }
-            if (ArrayHelper::isIn('weekSelect', $this->plugins)) {
-                $plugins[] = 'weekSelectPlugin({})';
+            if (ArrayHelper::keyExists('weekSelect', $this->plugins)) {
+                $options = Json::encode($this->plugins['weekSelect']);
+                $plugins[] = "weekSelectPlugin($options)";
             }
 
             $this->clientOptions['plugins'] = new JsExpression('[new ' . implode(', ', $plugins) . ']');
