@@ -17,7 +17,7 @@
     },
     "require": {
         "yiisoft/yii2": "*",
-        "bower-asset/flatpickr-calendar": ">=3"
+        "bower-asset/flatpickr": ">=3"
     },
     "autoload": {
         "psr-4": {
