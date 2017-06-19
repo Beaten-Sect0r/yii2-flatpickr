@@ -26,7 +26,7 @@ class FlatpickrWidget extends InputWidget
     public $locale;
 
     /**
-     * @var string
+     * @var array
      */
     public $plugins = [];
 
