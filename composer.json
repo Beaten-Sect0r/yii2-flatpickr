@@ -23,11 +23,5 @@
         "psr-4": {
             "bs\\Flatpickr\\": "src"
         }
-    },
-    "extra": {
-        "asset-installer-paths": {
-            "npm-asset-library": "vendor/npm",
-            "bower-asset-library": "vendor/bower"
-        }
     }
 }
