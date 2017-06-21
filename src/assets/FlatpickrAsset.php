@@ -8,7 +8,7 @@ use yii\web\AssetBundle;
 
 class FlatpickrAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/flatpickr-calendar/dist';
+    public $sourcePath = '@bower/flatpickr/dist';
     public $locale;
     public $plugins = [];
     public $theme;
