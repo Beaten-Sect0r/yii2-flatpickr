@@ -28,7 +28,7 @@ class FlatpickrAsset extends AssetBundle
 
         // plugin
         if (!empty($this->plugins) && is_array($this->plugins)) {
-            if (ArrayHelper::isIn('range', $this->plugins)) {
+            if (ArrayHelper::keyExists('rangePlugin', $this->plugins)) {
                 $this->js[] = 'plugins/rangePlugin.js';
             }
             if (ArrayHelper::keyExists('confirmDate', $this->plugins)) {
