@@ -126,8 +126,9 @@ class FlatpickrWidget extends InputWidget
         $this->clientOptions['locale'] = $this->locale;
 
         if (!empty($this->plugins) && is_array($this->plugins)) {
-            if (ArrayHelper::isIn('range', $this->plugins)) {
-                $plugins[] = 'rangePlugin()';
+            if (ArrayHelper::keyExists('rangePlugin', $this->plugins)) {
+                $options = Json::encode($this->plugins['rangePlugin']);
+                $plugins[] = "rangePlugin($options)";
             }
             if (ArrayHelper::keyExists('confirmDate', $this->plugins)) {
                 $options = Json::encode($this->plugins['confirmDate']);
