@@ -36,7 +36,7 @@ use bs\Flatpickr\FlatpickrWidget;
 
 ?>
 
-<?= $form->field($model, 'published_at')->widget(FlatpickrWidget::className(), [
+<?= $form->field($model, 'published_at')->widget(FlatpickrWidget::class, [
     'locale' => strtolower(substr(Yii::$app->language, 0, 2)),
     // https://chmln.github.io/flatpickr/plugins/
     'plugins' => [
